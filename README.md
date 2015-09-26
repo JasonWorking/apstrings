@@ -2,7 +2,7 @@
 
 An Apple dot strings file parser in ruby. 
 
-Valid input strings file formate :
+Valid input strings file formats :
 
 > ASCII
 > 
