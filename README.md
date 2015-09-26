@@ -1,8 +1,17 @@
 # Apstrings
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/apstrings`. To experiment with that code, run `bin/console` for an interactive prompt.
+An Apple dot strings file parser in ruby. 
 
-TODO: Delete this and the text above, and describe your gem
+Valid input strings file formate :
+
+> ASCII
+> 
+> UTF8
+> 
+> UTF-16lE
+> 
+> UTF-16bE
+
 
 ## Installation
 
@@ -22,7 +31,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+	string_file = Apstring.parse('path/to/dotStringFile')
+	
+	string_file.to_hash 
+	
+	string_file.to_json
+	
+	
+```
 
 ## Development
 
@@ -32,7 +49,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/apstrings. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/JasonWorking/apstrings. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
