@@ -1,6 +1,6 @@
 # Apstrings
 
-An Apple dot strings file parser in ruby. 
+Apple dot strings file parser and validator in ruby. 
 
 Valid input strings file formats :
 
@@ -31,15 +31,31 @@ Or install it yourself as:
 
 ## Usage
 
+
+####1. Parse a .strings file to json/hash in ruby :
 ```
-	string_file = Apstring.parse('path/to/dotStringFile')
+require 'apstrings'
+
+
+	string_file = Apstring.parse('path/to/dotStringFile.strings')
 	
-	string_file.to_hash 
+	string_file.to_hash # => {key1 => value1 , key2 = > value2 ...} 
 	
 	string_file.to_json
 	
 	
 ```
+
+
+####2. Run a validation for a .strings file and (optionally) compare a master .strings file to find missing keys. 
+
+```
+require 'apstrings'
+
+Apstrings.validate('path/to/dotStringFile.strings','path/to/masterDotStringFile.strings')
+
+```
+
 
 ## Development
 
