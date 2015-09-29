@@ -1,15 +1,25 @@
 require "apstrings/version"
+require 'colorize'
 
 module Apstrings
 require 'apstrings/reader'
 require 'apstrings/strings_parser'
-  # Public
-  def self.parse(file)
-    file = read(file)
-    StringsParser.new(file).parse_file
-  end
+require 'apstrings/strings_validator'
 
-  def self.read(file)
-    Reader.read(file)
-  end
+  # Public
+	def self.parse(file)
+    	file = Apstrings::read(file)
+		StringsParser.new(file).parse_file
+  	end
+
+	def self.read(file)
+		Reader.read(file)
+	end
+
+  	def self.validate(file,masterFile = nil)
+  		Validator::validate(file,masterFile)
+  	end
+  	
 end
+
+

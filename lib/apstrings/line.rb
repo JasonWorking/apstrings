@@ -6,7 +6,7 @@ module Apstrings
     def initialize(line)
       @content = line
       @in_comment = false
-      raise "Line does not end in ;" unless valid?
+      raise "ERROR : Line does not end with `;`, #{line}" unless valid?
     end
 
     def empty_line?
