@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+# require "bundler/setup"
+require "apstrings"
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+
+
+$ROOT = ARGV[0]
+
+Dir::chdir($ROOT)
+files_to_validate = {"master"=> nil,"files" => []}
+Dir.glob(File.join("**", "*.strings")) { |file| 
+	p File.basename(file)
+	if File.basename(file) == "zh-Hans.strings"
+		files_to_validate["master"] = File.expand_path(file)
+	else
+		files_to_validate["files"] << File.expand_path(file) 
+	end
+ }
+
+success = true
+files_to_validate["files"].each { |file|
+	if !Apstrings::validate(file,files_to_validate["master"])
+		success = false
+	end
+ }
+
+if success
+	p "Success, well done!"
+	exit(0)
+else
+	p "Failed: You'd better know what r u doing..."
+	exit(1)
+end
+ 

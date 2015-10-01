@@ -1,5 +1,4 @@
 require "apstrings/version"
-require 'colorize'
 
 module Apstrings
 require 'apstrings/reader'

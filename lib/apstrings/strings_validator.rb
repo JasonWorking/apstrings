@@ -6,9 +6,12 @@ module Apstrings
 	class Validator
 
 		def self.validate(file,masterFile)
+			@master = nil
 			puts "apstrings: start validate  strings file  ..."
 			if nil == masterFile
 				Log::warn("No master file provided, validating file format for #{file} only ...")
+			else
+				@master = Validator::paredFile(masterFile)
 			end
 
 			valid_master, valid_file , no_missing_key  = true,true,true
@@ -75,6 +78,7 @@ module Apstrings
 			}
 		end
 
+
 		def self.validate_special_characters(file)
 			puts "apstrings: checking syntax for #{file}..."
 			sf = Validator::paredFile(file)
@@ -82,9 +86,11 @@ module Apstrings
 			mismatchs = []
 			sf.key_values.each {
 				|e|  e.each_pair {
-					|key,value|		
-					striped_value = value.gsub(/%\d\$/,'%')  # Strip numbered format placeholders , e.g. %1$@ --> %@  
-					key_variables = key.scan(variables_regex) 
+					|key,value|	
+					fixed_key = Validator::value_in_master(key)	
+					striped_key =  fixed_key.gsub(/%\d\$/,'%') # Strip numbered format placeholders , e.g. %1$@ --> %@ 
+					striped_value = value.gsub(/%\d\$/,'%')   
+					key_variables = striped_key.scan(variables_regex) 
 					value_variables = striped_value.scan(variables_regex) 
 					if !(key_variables.sort == value_variables.sort)
 						mismatchs << {key => value}   
@@ -97,6 +103,19 @@ module Apstrings
 		def self.paredFile(file)
 			file = Reader.read(file)
 			StringsParser.new(file).parse_file
+		end
+
+		def self.value_in_master(key)
+			if @master
+				value_comment = @master.to_hash[key] # 
+				if value_comment == nil
+					return key 
+				else
+					return value_comment.keys[0]
+				end
+			else
+				key
+			end
 		end
 
 	end
