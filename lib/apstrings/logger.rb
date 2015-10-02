@@ -1,6 +1,6 @@
 
 module Apstrings
-	require 'colorize'
+	require 'colored'
 	class Log 
 		def self.info(message)
 			puts "INFO : #{message}".green

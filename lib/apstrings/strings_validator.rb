@@ -7,7 +7,7 @@ module Apstrings
 
 		def self.validate(file,masterFile)
 			@master = nil
-			puts "apstrings: start validate  strings file  ..."
+			# puts "apstrings: start validate  strings file  ..."
 			if nil == masterFile
 				Log::warn("No master file provided, validating file format for #{file} only ...")
 			else
@@ -23,17 +23,21 @@ module Apstrings
 			end
 			
 			if valid_master && valid_file &&  no_missing_key
-				Log::info("Yeah! 🍻 🍻 ")
+				# Log::info("Yeah! 🍻 🍻 ")
 				return true
-			else
-				Log::error("Oh no! Invalid file.")
-				return false
+			else if valid_master && valid_file && !no_missing_key
+					Log::warn("Missing keys found.")
+					return true
+				else
+					Log::error("Oh no! Invalid file.")
+					return false
+				end
 			end
 		end
 
 		def self.validate_format(file)
 			is_valid = true
-			puts "apstrings: start validate format for #{file} ..."
+			# puts "apstrings: start validate format for #{file} ..."
 			dup_keys_in_file = Validator::validate_duplicates(file)
 			mismatchs_in_file = Validator::validate_special_characters(file)
 			if nil != dup_keys_in_file && !dup_keys_in_file.empty?
@@ -56,7 +60,7 @@ module Apstrings
 		end
 
 		def self.validate_missing(file,masterFile)
-			puts "apstrings: checking missing keys for #{file}..."
+			# puts "apstrings: checking missing keys for #{file}..."
 			sf = Validator::paredFile(file)
 			sf_masterFile = Validator::paredFile(masterFile)
 			no_missing = true
@@ -71,7 +75,7 @@ module Apstrings
 		end
 
 		def self.validate_duplicates(file)
-			puts "apstrings: checking dup-keys for #{file}..."
+			# puts "apstrings: checking dup-keys for #{file}..."
 			sf = Validator::paredFile(file)
 			sf.keys.detect {
 				|e| sf.keys.count(e) > 1
@@ -80,7 +84,7 @@ module Apstrings
 
 
 		def self.validate_special_characters(file)
-			puts "apstrings: checking syntax for #{file}..."
+			# puts "apstrings: checking syntax for #{file}..."
 			sf = Validator::paredFile(file)
 			variables_regex = /%[hlqLztj]?[@%dDuUxXoOfeEgGcCsSpaAF]/
 			mismatchs = []

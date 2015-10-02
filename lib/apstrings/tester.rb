@@ -23,4 +23,4 @@ files_to_validate["files"].each { |file|
 	end
  }
 
- p success ? "Success, well done!" : "Failed: You'd better know what r u doing..."
+ p success ? Apstrings::log_info("Success, well done!") :  Apstrings::log_error("Failed: You'd better know what r u doing...")

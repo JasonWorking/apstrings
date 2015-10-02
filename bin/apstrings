@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# require "bundler/setup"
+require "bundler/setup"
 require "apstrings"
 
 # You can add fixtures and/or initialization code here to make experimenting
@@ -25,17 +25,23 @@ Dir.glob(File.join("**", "*.strings")) { |file|
  }
 
 success = true
+any_file = false
 files_to_validate["files"].each { |file|
+	any_file = true
 	if !Apstrings::validate(file,files_to_validate["master"])
 		success = false
 	end
  }
 
-if success
-	p "Success, well done!"
+if success && any_file
+	Apstrings::log_info("Well done! 🍻 🍻")
+	exit(0)
+else if !any_file
+	Apstrings::log_info("Nothing to validate.")
 	exit(0)
 else
-	p "Failed: You'd better know what r u doing..."
+	Apstrings::log_error("Failed: You'd better know what r u doing...")
 	exit(1)
+end
 end
  
