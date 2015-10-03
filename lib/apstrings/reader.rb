@@ -1,5 +1,5 @@
 module Apstrings
-  require 'FileUtils'
+  require 'fileutils'
   # Class for reading in files and returning an array of its content
   class Reader
     # Reads in a file and returns an array consisting of each line of input

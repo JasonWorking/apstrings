@@ -34,13 +34,13 @@ files_to_validate["files"].each { |file|
  }
 
 if success && any_file
-	Apstrings::log_info("Well done! 🍻 🍻")
+	Apstrings::log_info("Well done! 🍻 🍻\n")
 	exit(0)
 else if !any_file
 	Apstrings::log_info("Nothing to validate.")
 	exit(0)
 else
-	Apstrings::log_error("Failed: You'd better know what r u doing...")
+	Apstrings::log_error("Validate failed, See above for details\n")
 	exit(1)
 end
 end

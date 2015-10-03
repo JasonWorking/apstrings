@@ -7,9 +7,11 @@ module Apstrings
 
 		def self.validate(file,masterFile)
 			@master = nil
-			# puts "apstrings: start validate  strings file  ..."
+             puts "\n-----------------------------------------"
+             puts "apstrings: start validate  strings file : #{file} ..."
+             puts "-----------------------------------------"
 			if nil == masterFile
-				Log::warn("No master file provided, validating file format for #{file} only ...")
+				Log::warn("No master file provided, validating file format only ...")
 			else
 				@master = Validator::paredFile(masterFile)
 			end
@@ -26,10 +28,10 @@ module Apstrings
 				# Log::info("Yeah! 🍻 🍻 ")
 				return true
 			else if valid_master && valid_file && !no_missing_key
-					Log::warn("Missing keys found.")
+#					Log::warn("Missing keys found.")
 					return true
 				else
-					Log::error("Oh no! Invalid file.")
+#					Log::error("Invalid file.")
 					return false
 				end
 			end

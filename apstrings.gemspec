@@ -20,9 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "true"
-  spec.add_development_dependency "colored"
-  spec.add_development_dependency "json"
-  spec.add_development_dependency "open3"
+  spec.add_development_dependency "true", '~> 0'
+  spec.add_development_dependency "colored",'~> 0'
+  spec.add_development_dependency "json", '~> 0'
 
 end

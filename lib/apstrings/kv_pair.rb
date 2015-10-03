@@ -12,7 +12,7 @@ module Apstrings
     end
 
     def value
-     line.value.strip unless line.key.nil?
+     line.value.strip unless line.key.nil? 
     end
 
     def comment
